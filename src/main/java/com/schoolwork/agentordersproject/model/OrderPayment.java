@@ -1,5 +1,6 @@
 package com.schoolwork.agentordersproject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.id.Assigned;
 
 import javax.persistence.*;

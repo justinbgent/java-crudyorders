@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface AgentRepo extends CrudRepository<Agent, Long> {
     Agent getByAgentcode(long agentcode);
+
+    Agent save(Agent agent);
 }

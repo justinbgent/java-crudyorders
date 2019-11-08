@@ -16,4 +16,24 @@ public interface Service {
     Agent getAgentById(long id);
 
     Order getOrderById(long id);
+
+    Agent saveAgent(Agent agent);
+
+    Customer saveCustomer(Customer customer);
+
+    Order saveOrder(Order order);
+
+    Order updateOrder(Order order, long ordnum);
+
+    Customer updateCustomer(Customer customer, long custcode);
+
+    void deleteCustomer(long custcode);
+
+    void deleteOrder(long ordnum);
+
+//    void addAgent(Agent agent);
+//
+//    void addCustomer(Customer customer);
+//
+//    void addOrder(Order order);
 }

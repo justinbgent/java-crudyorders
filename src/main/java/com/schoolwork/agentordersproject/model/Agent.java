@@ -63,4 +63,12 @@ public class Agent {
     public List<Customer> getCustomers() { return customers; }
 
     public void setCustomers(List<Customer> customers) { this.customers = customers; }
+
+    public void addCustomer(Customer customer){
+        customers.add(customer);
+    }
+
+    public void removeCustomer(Customer customer){
+        customers.remove(customer);
+    }
 }

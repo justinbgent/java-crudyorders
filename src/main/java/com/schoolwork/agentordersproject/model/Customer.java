@@ -28,7 +28,17 @@ public class Customer {
     private String phone;
     //private long agentcode;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Transient
+    public Boolean hasopeningamtValue = false;
+    @Transient
+    public Boolean hasReceiveamtValue = false;
+    @Transient
+    public Boolean hasPaymentamtValue = false;
+    @Transient
+    public Boolean hasOutstandingamtValue = false;
+    @Transient
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonIgnoreProperties("customer")
     List<Order> orders = new ArrayList<>();
 
@@ -40,7 +50,7 @@ public class Customer {
 
     public Customer() { }
 
-    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone) {
+    public Customer(String custname, String custcity, String workingarea, String custcountry, String grade, double openingamt, double receiveamt, double paymentamt, double outstandingamt, String phone, Agent agent) {
         this.custname = custname;
         this.custcity = custcity;
         this.workingarea = workingarea;
@@ -51,6 +61,7 @@ public class Customer {
         this.paymentamt = paymentamt;
         this.outstandingamt = outstandingamt;
         this.phone = phone;
+        this.agent = agent;
     }
 
     public long getCustcode() { return custcode; }
@@ -79,19 +90,27 @@ public class Customer {
 
     public double getOpeningamt() { return openingamt; }
 
-    public void setOpeningamt(double openingamt) { this.openingamt = openingamt; }
+    public void setOpeningamt(double openingamt) {
+        hasopeningamtValue = true;
+        this.openingamt = openingamt; }
 
     public double getReceiveamt() { return receiveamt; }
 
-    public void setReceiveamt(double receiveamt) { this.receiveamt = receiveamt; }
+    public void setReceiveamt(double receiveamt) {
+        hasReceiveamtValue = true;
+        this.receiveamt = receiveamt; }
 
     public double getPaymentamt() { return paymentamt; }
 
-    public void setPaymentamt(double paymentamt) { this.paymentamt = paymentamt; }
+    public void setPaymentamt(double paymentamt) {
+        hasPaymentamtValue = true;
+        this.paymentamt = paymentamt; }
 
     public double getOutstandingamt() { return outstandingamt; }
 
-    public void setOutstandingamt(double outstandingamt) { this.outstandingamt = outstandingamt; }
+    public void setOutstandingamt(double outstandingamt) {
+        hasOutstandingamtValue = true;
+        this.outstandingamt = outstandingamt; }
 
     public String getPhone() { return phone; }
 
@@ -107,5 +126,13 @@ public class Customer {
 
     public void setAgent(Agent agent) {
         this.agent = agent;
+    }
+
+    public void addOrder(Order order){
+        orders.add(order);
+    }
+
+    public void removeOrder(Order order){
+        orders.remove(order);
     }
 }

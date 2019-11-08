@@ -11,4 +11,10 @@ public interface CustomerRepo extends CrudRepository<Customer, Long> {
     ArrayList<Customer> getAllBy();
 
     Customer getByCustcode(long custcode);
+
+    void deleteCustomerByCustcode(long custcode);
+
+//    Customer save(Customer customer);
+//
+//    Customer update(Customer customer, long custcode);
 }

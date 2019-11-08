@@ -21,7 +21,12 @@ public class Order implements Serializable {
     private double advanceamount;
     private String orderdescription;
 
-    @ManyToOne
+    @Transient
+    public Boolean hasOrdAmountValue = false;
+    @Transient
+    public Boolean hasAdvanceAmtValue = false;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "custcode", nullable = false)
     @JsonIgnoreProperties("orders")
     private Customer customer;
@@ -35,10 +40,11 @@ public class Order implements Serializable {
 
     public Order() { }
 
-    public Order(double ordamount, double advanceamount, String orderdescription) {
+    public Order(double ordamount, double advanceamount, String orderdescription, Customer customer) {
         this.ordamount = ordamount;
         this.advanceamount = advanceamount;
         this.orderdescription = orderdescription;
+        this.customer = customer;
     }
 
     public long getOrdnum() { return ordnum; }
@@ -47,11 +53,15 @@ public class Order implements Serializable {
 
     public double getOrdamount() { return ordamount; }
 
-    public void setOrdamount(double ordamount) { this.ordamount = ordamount; }
+    public void setOrdamount(double ordamount) {
+        hasOrdAmountValue = true;
+        this.ordamount = ordamount; }
 
     public double getAdvanceamount() { return advanceamount; }
 
-    public void setAdvanceamount(double advanceamount) { this.advanceamount = advanceamount; }
+    public void setAdvanceamount(double advanceamount) {
+        hasAdvanceAmtValue = true;
+        this.advanceamount = advanceamount; }
 
     public String getOrderdescription() { return orderdescription; }
 
